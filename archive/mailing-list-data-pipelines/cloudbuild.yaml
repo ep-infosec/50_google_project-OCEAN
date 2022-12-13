@@ -1,0 +1,34 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+steps:
+# All list and partial dates run
+- name: 'ubuntu'
+  env:
+    - 'PROJECT_ID=$PROJECT_ID'
+
+# Run for all available lists last month
+- name: golang
+  args: ['go', 'run', '1-raw-data/mailinglists/main.go', '-code-run-type=buildAllLatestMonthData', '-project-id=$PROJECT_ID']
+  timeout: '10800s'
+
+# Run all lists and all dates load
+#- name: golang
+#  args: ['go', 'run', '1-raw-data/mailinglists/main.go', '-code-run-type=buildAllData', '-project-id=$PROJECT_ID']
+
+#Test Run
+#- name: golang
+#  args: ['go', 'run', '1-raw-data/mailinglists/main.go', '-project-id=$PROJECT_ID']
+
